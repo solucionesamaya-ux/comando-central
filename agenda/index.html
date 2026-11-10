@@ -35,48 +35,7 @@
 </style>
 </head>
 <body>
-<main>
-  <div id="abriendo" hidden>
-    <img src="../iconos/icono-512.png" alt="Ricardo Porras · Diputado">
-    <p>Abriendo…</p>
-    <p id="ayuda" hidden>¿No abre? <a href="https://script.google.com/a/macros/hyaabogadosasociados.com/s/AKfycbwvrjdt6MoR3uEzTJml5YVx45tdpscAiOuZhP_0La55so8x5Ibmj3wqpgEB-XNjKnfz/exec?v=vistamovil">Toca aquí</a></p>
-  </div>
-  <div class="tarjeta" id="instalar">
-    <img src="../iconos/icono-512.png" alt="Ricardo Porras · Diputado">
-    <h1>Agenda tu reunión</h1>
-    <p class="sub">Instálala en tu celular: queda con el logo de Ricardo Porras en la pantalla de inicio.</p>
-    <button class="btn rojo" id="btnInstalar" hidden>Instalar la app</button>
-    <div class="pasos" id="pasosIphone"><b>En iPhone (Safari)</b><ol><li>Toca <b style="display:inline">Compartir</b> (el cuadro con la flecha hacia arriba).</li><li>Elige <b style="display:inline">Agregar a inicio</b> y toca <b style="display:inline">Agregar</b>.</li></ol></div>
-    <div class="pasos" id="pasosAndroid"><b>En Android (Chrome)</b><ol><li>Toca el menú <b style="display:inline">⋮</b> de arriba a la derecha.</li><li>Elige <b style="display:inline">Instalar app</b> o <b style="display:inline">Agregar a la pantalla principal</b>.</li></ol></div>
-    <a class="btn gris" href="https://script.google.com/a/macros/hyaabogadosasociados.com/s/AKfycbwvrjdt6MoR3uEzTJml5YVx45tdpscAiOuZhP_0La55so8x5Ibmj3wqpgEB-XNjKnfz/exec?v=vistamovil">Abrir sin instalar</a>
-  </div>
-</main>
-<script>
-  var DESTINO = 'https://script.google.com/a/macros/hyaabogadosasociados.com/s/AKfycbwvrjdt6MoR3uEzTJml5YVx45tdpscAiOuZhP_0La55so8x5Ibmj3wqpgEB-XNjKnfz/exec?v=vistamovil';
-  var instalada = window.navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
-  if (instalada) {
-    /* Abierta desde el ícono de la pantalla de inicio: entra directo a la app */
-    document.getElementById('instalar').hidden = true;
-    document.getElementById('abriendo').hidden = false;
-    location.replace(DESTINO);
-    setTimeout(function () { document.getElementById('ayuda').hidden = false; }, 4000);
-  } else {
-    var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
-    if (ios) document.getElementById('pasosAndroid').hidden = true;
-    if (android) document.getElementById('pasosIphone').hidden = true;
-    /* Android: botón de instalación directa cuando Chrome lo ofrece */
-    var aviso = null;
-    window.addEventListener('beforeinstallprompt', function (e) {
-      e.preventDefault(); aviso = e;
-      document.getElementById('btnInstalar').hidden = false;
-      document.getElementById('pasosAndroid').hidden = true;
-    });
-    document.getElementById('btnInstalar').addEventListener('click', function () {
-      if (!aviso) return;
-      aviso.prompt();
-      aviso.userChoice.then(function () { aviso = null; document.getElementById('btnInstalar').hidden = true; });
-    });
-  }
-</script>
+<main><div class="tarjeta"><p class="sub">Esta página se mudó a <a href="https://ricardo-porras.github.io/agenda/">https://ricardo-porras.github.io/agenda/</a></p></div></main>
+<script>location.replace('https://ricardo-porras.github.io/agenda/' + location.search);</script>
 </body>
 </html>
