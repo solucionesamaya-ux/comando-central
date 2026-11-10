@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Equipo · Comando Central</title>
+<meta name="description" content="App del equipo de campo de Ricardo Porras.">
+<meta name="theme-color" content="#A90607">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="../iconos/favicon-32.png">
+<link rel="apple-touch-icon" href="../iconos/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Equipo RP">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+  /* Página de entrada: su logo es el ícono al instalarla. Abierta desde el ícono, lleva a la app de Apps Script. */
+  :root { --rojo: #A90607; --tinta: #1D1D1F; --gris: #6E6E73; --linea: #ECDCDC; }
+  html, body { margin: 0; min-height: 100%; background: var(--rojo); font: 16px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--tinta); }
+  main { min-height: 100vh; box-sizing: border-box; display: grid; place-items: center; padding: max(24px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 32px max(16px, env(safe-area-inset-left)); }
+  .tarjeta { width: 100%; max-width: 420px; background: #fff; border-radius: 22px; padding: 26px 22px; box-shadow: 0 16px 40px rgba(0,0,0,.25); text-align: center; }
+  .tarjeta img { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 6px 18px rgba(169,6,7,.35); }
+  h1 { font-size: 22px; margin: 14px 0 4px; }
+  .sub { color: var(--gris); margin: 0 0 18px; font-size: 15px; }
+  .btn { display: block; width: 100%; box-sizing: border-box; border: 0; border-radius: 14px; padding: 15px; font-weight: 600; font-size: 16px; font-family: inherit; text-decoration: none; cursor: pointer; }
+  .btn.rojo { background: var(--rojo); color: #fff; }
+  .btn.gris { background: #F2F2F4; color: var(--tinta); margin-top: 10px; }
+  .pasos { text-align: left; background: #FBF3F3; border: 1px solid var(--linea); border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; font-size: 15px; }
+  .pasos b { display: block; margin-bottom: 6px; }
+  .pasos ol { margin: 0; padding-left: 20px; }
+  [hidden] { display: none !important; }
+  #abriendo { color: #fff; text-align: center; font-weight: 600; }
+  #abriendo img { width: 150px; height: 150px; border-radius: 34px; box-shadow: 0 10px 30px rgba(0,0,0,.25); display: block; margin: 0 auto 16px; }
+  #abriendo a { color: #fff; }
+</style>
+</head>
+<body>
+<main>
+  <div id="abriendo" hidden>
+    <img src="../iconos/icono-512.png" alt="Ricardo Porras · Diputado">
+    <p>Abriendo…</p>
+    <p id="ayuda" hidden>¿No abre? <a href="https://script.google.com/a/macros/hyaabogadosasociados.com/s/AKfycbwvrjdt6MoR3uEzTJml5YVx45tdpscAiOuZhP_0La55so8x5Ibmj3wqpgEB-XNjKnfz/exec?v=equipo">Toca aquí</a></p>
+  </div>
+  <div class="tarjeta" id="instalar">
+    <img src="../iconos/icono-512.png" alt="Ricardo Porras · Diputado">
+    <h1>App del equipo</h1>
+    <p class="sub">Instálala en tu celular: queda con el logo de Ricardo Porras en la pantalla de inicio.</p>
+    <button class="btn rojo" id="btnInstalar" hidden>Instalar la app</button>
+    <div class="pasos" id="pasosIphone"><b>En iPhone (Safari)</b><ol><li>Toca <b style="display:inline">Compartir</b> (el cuadro con la flecha hacia arriba).</li><li>Elige <b style="display:inline">Agregar a inicio</b> y toca <b style="display:inline">Agregar</b>.</li></ol></div>
+    <div class="pasos" id="pasosAndroid"><b>En Android (Chrome)</b><ol><li>Toca el menú <b style="display:inline">⋮</b> de arriba a la derecha.</li><li>Elige <b style="display:inline">Instalar app</b> o <b style="display:inline">Agregar a la pantalla principal</b>.</li></ol></div>
+    <a class="btn gris" href="https://script.google.com/a/macros/hyaabogadosasociados.com/s/AKfycbwvrjdt6MoR3uEzTJml5YVx45tdpscAiOuZhP_0La55so8x5Ibmj3wqpgEB-XNjKnfz/exec?v=equipo">Abrir sin instalar</a>
+  </div>
+</main>
+<script>
+  var DESTINO = 'https://script.google.com/a/macros/hyaabogadosasociados.com/s/AKfycbwvrjdt6MoR3uEzTJml5YVx45tdpscAiOuZhP_0La55so8x5Ibmj3wqpgEB-XNjKnfz/exec?v=equipo';
+  var instalada = window.navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+  if (instalada) {
+    /* Abierta desde el ícono de la pantalla de inicio: entra directo a la app */
+    document.getElementById('instalar').hidden = true;
+    document.getElementById('abriendo').hidden = false;
+    location.replace(DESTINO);
+    setTimeout(function () { document.getElementById('ayuda').hidden = false; }, 4000);
+  } else {
+    var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
+    if (ios) document.getElementById('pasosAndroid').hidden = true;
+    if (android) document.getElementById('pasosIphone').hidden = true;
+    /* Android: botón de instalación directa cuando Chrome lo ofrece */
+    var aviso = null;
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault(); aviso = e;
+      document.getElementById('btnInstalar').hidden = false;
+      document.getElementById('pasosAndroid').hidden = true;
+    });
+    document.getElementById('btnInstalar').addEventListener('click', function () {
+      if (!aviso) return;
+      aviso.prompt();
+      aviso.userChoice.then(function () { aviso = null; document.getElementById('btnInstalar').hidden = true; });
+    });
+  }
+</script>
+</body>
+</html>

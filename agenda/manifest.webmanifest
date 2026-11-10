@@ -1,0 +1,29 @@
+{
+  "name": "Agenda tu reunión · Ricardo Porras",
+  "short_name": "Agenda RP",
+  "description": "Solicita una reunión con Ricardo Porras en tu municipio.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#A90607",
+  "theme_color": "#A90607",
+  "icons": [
+    {
+      "src": "../iconos/icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "../iconos/icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "../iconos/icono-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
